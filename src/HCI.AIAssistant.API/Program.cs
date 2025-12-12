@@ -75,6 +75,7 @@ if (app.Environment.IsProduction())
     app.UseHttpsRedirection();
 }
 
+app.UseCors("CORS");
 
 app.UseAuthorization();
 

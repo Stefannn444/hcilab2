@@ -21,26 +21,11 @@ if (string.IsNullOrWhiteSpace(secretsPrefix))
 var keyVaultUri = new Uri(
     $"https://{keyVaultName}.vault.azure.net/"
 );
-
-Console.WriteLine($"Attempting to connect to Key Vault: {keyVaultUri}");
-Console.WriteLine($"Using secrets prefix: {secretsPrefix}");
-
-try
-{
-    builder.Configuration.AddAzureKeyVault(
-        keyVaultUri,
-        new DefaultAzureCredential(),
-        new CustomSecretManager(secretsPrefix)
-    );
-    Console.WriteLine("Successfully connected to Key Vault!");
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"ERROR connecting to Key Vault: {ex.Message}");
-    Console.WriteLine($"Exception Type: {ex.GetType().Name}");
-    Console.WriteLine("Make sure you're authenticated via Azure CLI: az login");
-    throw;
-}
+builder.Configuration.AddAzureKeyVault(
+    keyVaultUri,
+    new DefaultAzureCredential(),
+    new CustomSecretManager(secretsPrefix)
+);
 
 
 // Configure values based on appsettings.json 

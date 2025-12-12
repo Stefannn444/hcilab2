@@ -58,7 +58,7 @@ public class AIAssistantController : ControllerBase
         };
 
         string? ioTHubConnectionString = _secretsService?.IoTHubSecrets?.ConnectionString;
-        if (ioTHubConnectionString != null)
+        if (!string.IsNullOrWhiteSpace(ioTHubConnectionString) && ioTHubConnectionString.Contains("HostName="))
         {
             var serviceClientForIoTHub = ServiceClient.CreateFromConnectionString(ioTHubConnectionString);
             var seralizedMessage = JsonConvert.SerializeObject(textMessageResponse);
